@@ -21,7 +21,7 @@ jobs:
           - 5432:5432
     env:
       DB_CONNECTION: pgsql
-      DB_HOST: postgres
+      DB_HOST: localhost
       DB_PORT: 5432
       DB_DATABASE: postgres
       DB_USERNAME: postgres
