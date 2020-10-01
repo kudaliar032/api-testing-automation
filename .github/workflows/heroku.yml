@@ -1,0 +1,19 @@
+name: Heroku Deployment
+on:
+  workflow_run:
+    workflows: ["Laravel"]
+    branches: [master]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    name: Deploy to Heroku
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: AkhileshNS/heroku-deploy@v3.5.6
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: api-testing-automation
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
