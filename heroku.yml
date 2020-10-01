@@ -1,0 +1,4 @@
+release:
+  command: echo "test"
+run:
+  web: vendor/bin/heroku-php-apache2 public/
