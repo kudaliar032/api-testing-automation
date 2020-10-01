@@ -8,19 +8,29 @@ on:
 
 jobs:
   laravel-tests:
-
+    name: Laravel Test Build
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:12-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: LuisSuarez9
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
     env:
-      DB_CONNECTION: sqlite
-      DB_DATABASE: database/database.sqlite
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: postgres
+      DB_USERNAME: postgres
+      DB_PASSWORD: LuisSuarez9
+
     steps:
     - uses: actions/checkout@v2
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-    - name: Create Database
-      run: |
-        mkdir -p database
-        touch database/database.sqlite
     - name: Install Dependencies
       run: composer install
     - name: Generate key
